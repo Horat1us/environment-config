@@ -18,13 +18,14 @@ abstract class Config
 
     protected function getEnv(string $key, $default = null)
     {
-        $value = getenv($this->keyPrefix . $key);
+        $prefixed = $this->keyPrefix . $key;
+        $value = getenv($prefixed);
 
         if ($value === false) {
             if (!is_null($default)) {
                 return $default;
             }
-            throw new \DomainException("Missing environment key $key");
+            throw new MissingEnvironmentException($prefixed);
         }
 
         return $value;

@@ -46,7 +46,7 @@ $config->getTimeout(); // 10
 putenv("PREFIX_APP_TIMEOUT=5");
 $config->getTimeout(); // 5
 
-// \DomainException will be thrown because no default value provided
+// MissingEnvironmentException will be thrown because no default value provided
 $config->getName(); 
 ```
 
