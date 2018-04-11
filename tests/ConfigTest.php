@@ -38,17 +38,26 @@ class ConfigTest extends TestCase
         $this->assertEquals(10, $config->getValue());
     }
 
+    /**
+     * @expectedException \Horat1us\Environment\MissingEnvironmentException
+     */
     public function testMissingDefault()
     {
-        $config = new class extends Environment\Config
+        $prefix = 'testPrefix';
+
+        $config = new class($prefix) extends Environment\Config
         {
             public function getValue(): int
             {
                 return $this->getEnv("KEY");
             }
         };
-        putenv("KEY"); // remove KEY from environment
-        $this->expectException(\DomainException::class);
-        $config->getValue();
+        putenv("{$prefix}KEY"); // remove KEY from environment
+        try {
+            $config->getValue();
+        } catch (Environment\MissingEnvironmentException $exception) {
+            $this->assertEquals($exception->getKey(), "{$prefix}KEY");
+            throw $exception;
+        }
     }
 }

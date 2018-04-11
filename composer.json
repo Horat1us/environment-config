@@ -33,5 +33,10 @@
     "platform": {
       "php": "7.1"
     }
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs --standard=PSR2 ./src ./tests",
+    "phpcbf": "./vendor/bin/phpcbf --standard=PSR2 ./src ./tests",
+    "test": "./vendor/bin/phpunit"
   }
 }
