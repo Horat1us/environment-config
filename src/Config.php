@@ -16,6 +16,12 @@ abstract class Config
         $this->keyPrefix = $keyPrefix;
     }
 
+    /**
+     * @param string $key
+     * @param null $default
+     * @return mixed
+     * @throws MissingEnvironmentException
+     */
     protected function getEnv(string $key, $default = null)
     {
         $prefixed = $this->keyPrefix . $key;
