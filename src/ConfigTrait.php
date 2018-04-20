@@ -28,5 +28,20 @@ trait ConfigTrait
         return $value;
     }
 
+    /**
+     * Support method for getEnv
+     * Can be used as second argument:
+     *
+     * ```php
+     * $this->getEnv('KEY', [$this, 'null']);
+     * ```
+     *
+     * @return null
+     */
+    protected function null()
+    {
+        return null;
+    }
+
     abstract protected function getEnvironmentKeyPrefix(): string;
 }
