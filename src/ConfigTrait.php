@@ -39,7 +39,7 @@ trait ConfigTrait
      * @since 1.2.1
      * @return null
      */
-    protected function null()
+    final protected function null()
     {
         return null;
     }
