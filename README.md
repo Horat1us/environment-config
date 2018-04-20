@@ -37,6 +37,15 @@ class Config extends Environment\Config {
         });
     }
     
+    public function getNullValue(): ?string
+    {
+        /**
+          * if you want to return null instead of throwing exceptio
+          * if no environment variable found
+          */
+        return $this->getEnv('KEY', [$this, 'null']);  
+    }
+    
     public function getName(): string {
         return $this->getEnv($key = 'APP_NAME');
     }

@@ -84,6 +84,19 @@ class ConfigTest extends TestCase
         $this->assertEquals(2, $config->getValue());
     }
 
+    public function testDefaultNull(): void
+    {
+        $config = new class extends Environment\Config
+        {
+            public function getNullValue()
+            {
+                return $this->getEnv("KEY", [$this, 'null']);
+            }
+        };
+        putenv("KEY");
+        $this->assertNull($config->getNullValue());
+    }
+
     /**
      * @expectedException \Horat1us\Environment\MissingEnvironmentException
      */
