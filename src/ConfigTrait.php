@@ -36,6 +36,7 @@ trait ConfigTrait
      * $this->getEnv('KEY', [$this, 'null']);
      * ```
      *
+     * @since 1.2.1
      * @return null
      */
     protected function null()
