@@ -8,7 +8,9 @@ namespace Horat1us\Environment;
  */
 abstract class Config
 {
-    /** @var string  */
+    use ConfigTrait;
+
+    /** @var string */
     private $keyPrefix;
 
     public function __construct(string $keyPrefix = '')
@@ -16,24 +18,8 @@ abstract class Config
         $this->keyPrefix = $keyPrefix;
     }
 
-    /**
-     * @param string $key
-     * @param null $default
-     * @return mixed
-     * @throws MissingEnvironmentException
-     */
-    protected function getEnv(string $key, $default = null)
+    protected function getEnvironmentKeyPrefix(): string
     {
-        $prefixed = $this->keyPrefix . $key;
-        $value = getenv($prefixed);
-
-        if ($value === false) {
-            if (!is_null($default)) {
-                return $default;
-            }
-            throw new MissingEnvironmentException($prefixed);
-        }
-
-        return $value;
+        return $this->keyPrefix;
     }
 }

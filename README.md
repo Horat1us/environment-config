@@ -6,6 +6,8 @@
 
 Simple class to provide config using `getenv` function with prefix.
 
+[Changelog](./CHANGELOG.md)
+
 ## Installation
 Using composer:
 ```bash
@@ -27,11 +29,18 @@ class Config extends Environment\Config {
         return $this->getEnv($key = 'APP_TIMEOUT', $default = 10);
     }
     
+    public function getSlow(): string
+    {
+        // default can be instance of \Closure or callable array, like [$this, 'calculate']
+        return $this->getEnv($key = 'APP_KEY', $default = function(): string {
+            return 'some-string'; // slow operation, may be fetching from DB 
+        });
+    }
+    
     public function getName(): string {
         return $this->getEnv($key = 'APP_NAME');
     }
 }
-
 ```
 
 then use it:
@@ -45,6 +54,8 @@ $config->getTimeout(); // 10
 
 putenv("PREFIX_APP_TIMEOUT=5");
 $config->getTimeout(); // 5
+
+$config->getSlow(); // some-string
 
 // MissingEnvironmentException will be thrown because no default value provided
 $config->getName(); 
