@@ -35,6 +35,24 @@ trait ConfigTrait
     }
 
     /**
+     * @param string $key
+     * @param Enum $type
+     * @param mixed $default
+     * @return array|false|mixed|null|string
+     */
+    protected function getEnvStrict(string $key, Enum $type, $default = null)
+    {
+        $value = $this->getEnv($key, $default);
+        if (is_null($value)) {
+            return $value;
+        }
+
+        $type->validate($value);
+
+        return $value;
+    }
+
+    /**
      * Support method for getEnv
      * Can be used as second argument:
      *
