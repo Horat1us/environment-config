@@ -19,7 +19,7 @@ class Enum
     /**
      * @throws Exception\Invalid
      */
-    public function validate(?$value): void
+    public function validate($value): void
     {
         if (in_array($value, $this->values)) {
             return;
