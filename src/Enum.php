@@ -17,6 +17,8 @@ class Enum
     }
 
     /**
+     * @param mixed $value
+     *
      * @throws Exception\Invalid
      */
     public function validate($value): void
@@ -47,24 +49,24 @@ class Enum
     {
         static $cache = [];
 
-        if (!array_key_exists($className, $cache)) {
+        if (!isset($cache[$className])) {
             $reflection = new \ReflectionClass($className);
             $cache[$className] = $reflection->getConstants();
         }
 
         $values = $cache[$className];
 
-        if (!is_null($prefix)) {
+        if ($prefix) {
             foreach ($values as $name => $v) {
                 if (mb_strpos($name, $prefix) !== 0) {
-                    unset($values[$prefix]);
+                    unset($values[$name]);
                 }
             }
         }
 
-        if (!empty($except)) {
-            $values = array_filter($values, function (string $value) use ($except): bool {
-                return !in_array($value, $except);
+        if ($except) {
+            $values = array_filter($values, function ($value) use ($except): bool {
+                return !in_array($value, $except, true);
             });
         }
 
@@ -74,10 +76,7 @@ class Enum
     final protected function valuesString(): array
     {
         return array_map(function ($value): string {
-            if (is_scalar($value)) {
-                return $value;
-            }
-            if (is_object($value) && method_exists($value, '__toString')) {
+            if (is_scalar($value) || is_object($value) && method_exists($value, '__toString')) {
                 return (string)$value;
             }
             return var_export($value, true);
