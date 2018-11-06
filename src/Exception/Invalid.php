@@ -14,7 +14,7 @@ class Invalid extends \DomainException implements Environment\Exception
     /** @var mixed */
     protected $value;
 
-    public function __construct(?$value, string $message = "", int $code = 0, Throwable $previous = null)
+    public function __construct($value, string $message = "", int $code = 0, Throwable $previous = null)
     {
         $this->value = $value;
         parent::__construct($message, $code, $previous);
