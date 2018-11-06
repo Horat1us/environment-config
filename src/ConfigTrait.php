@@ -8,6 +8,12 @@ namespace Horat1us\Environment;
  */
 trait ConfigTrait
 {
+    /**
+     * @param string $key
+     * @param null $default
+     * @throws Exception\Missing
+     * @return array|false|mixed|null|string
+     */
     protected function getEnv(string $key, $default = null)
     {
         $prefixed = $this->getEnvironmentKeyPrefix() . $key;
@@ -15,7 +21,7 @@ trait ConfigTrait
 
         if ($value === false) {
             if (is_null($default)) {
-                throw new MissingEnvironmentException($prefixed);
+                throw new Exception\Missing($prefixed);
             }
 
             if ($default instanceof \Closure || is_array($default) && is_callable($default)) {
