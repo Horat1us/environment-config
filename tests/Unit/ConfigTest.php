@@ -99,7 +99,7 @@ class ConfigTest extends TestCase
     }
 
     /**
-     * @expectedException \Horat1us\Environment\Exception\Missing
+     * @expectedException \Horat1us\Environment\MissingEnvironmentException
      */
     public function testMissingDefault(): void
     {
