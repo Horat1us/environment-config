@@ -18,8 +18,7 @@ trait MagicTrait
      */
     final private function getEnvironmentKeySuffix(string $callerName): string
     {
-        if (
-            strlen($callerName) < 3
+        if (strlen($callerName) < 3
             || strpos($callerName, "get") !== 0
         ) {
             throw new \RuntimeException("Trait method must be named as get{getEnvironmentKeySuffix}");
@@ -28,9 +27,11 @@ trait MagicTrait
         $methodName = substr($callerName, 3, strlen($callerName) - 3);
         // map camelCase string to CAMEL_CASE
         $suffix = strtoupper(
-            substr(preg_replace('/([A-Z])/', '_$1', $methodName),
+            substr(
+                preg_replace('/([A-Z])/', '_$1', $methodName),
                 1,
-                strlen($methodName) * 2)
+                strlen($methodName) * 2
+            )
         );
 
         return $suffix;
