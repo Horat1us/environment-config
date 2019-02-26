@@ -70,6 +70,28 @@ $config->getSlow(); // some-string
 $config->getName(); 
 ```
 
+### MagicTrait
+You can define your config keys/methods using [MagicTrait](./src/MagicTrait.php):
+```php
+<?php
+
+use Horat1us\Environment;
+
+class Config {
+    use Environment\MagicTrait {
+        getEnvironment as public getHost;
+    }
+    
+    protected function getEnvironmentKeyPrefix(): string {
+        return 'TEST_';
+    }
+}
+
+$config = new Config;
+$config->getHost(); // TEST_HOST environment key will be used to get value
+```
+*Note: your environment getters should be named with prefix get and have camel case name*
+
 ## Author
 - [Alexander Letnikow](mailto:reclamme@gmail.com)
 
