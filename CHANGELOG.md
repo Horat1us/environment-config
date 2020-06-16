@@ -1,5 +1,7 @@
 # EnvironmentConfig Changelog
 
+## 1.3.0
+
 ## 1.2.1, 20 April, 2018
 - Add [ConfigTrait::null()](./src/ConfigTrait.php#L41) method
 

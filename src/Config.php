@@ -1,21 +1,20 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Horat1us\Environment;
 
-/**
- * Class Config
- * @package Horat1us\Environment
- */
+use Dotenv\Repository\RepositoryInterface;
+
 abstract class Config
 {
     use ConfigTrait;
 
     /** @var string */
-    private $keyPrefix;
+    private string $keyPrefix;
 
-    public function __construct(string $keyPrefix = '')
+    public function __construct(string $keyPrefix = '', RepositoryInterface $repository = null)
     {
         $this->keyPrefix = $keyPrefix;
+        $this->setEnvironment($repository);
     }
 
     protected function getEnvironmentKeyPrefix(): string

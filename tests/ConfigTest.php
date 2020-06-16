@@ -1,16 +1,10 @@
 <?php
 
-namespace Horat1us\Environment\Tests\Unit;
+namespace Horat1us\Environment\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Horat1us\Environment;
 
-/**
- * Class ConfigTest
- * @package Horat1us\Environment\Tests\Unit
- * @coversDefaultClass \Horat1us\Environment\Config
- * @internal
- */
 class ConfigTest extends TestCase
 {
     public function testPrefix(): void
@@ -98,11 +92,9 @@ class ConfigTest extends TestCase
         $this->assertNull($config->getNullValue());
     }
 
-    /**
-     * @expectedException \Horat1us\Environment\MissingEnvironmentException
-     */
     public function testMissingDefault(): void
     {
+        $this->expectException(Environment\Exception\ValidationException::class);
         $prefix = 'testPrefix';
 
         $config = new class($prefix) extends Environment\Config
@@ -114,27 +106,5 @@ class ConfigTest extends TestCase
         };
         putenv("{$prefix}KEY"); // remove KEY from environment
         $config->getValue();
-    }
-
-    public function testGetEnvStrict(): void
-    {
-        $prefix = 'PREFIX_';
-
-        $config = new class($prefix) extends Environment\Config
-        {
-            public function getValue()
-            {
-                return $this->getEnvStrict(
-                    'VALUE',
-                    Environment\Enum::fromConstants(EnumTest::class, 'VALUE_', [EnumTest::VALUE_BOOL]),
-                    [$this, 'null']
-                );
-            }
-        };
-        putenv("{$prefix}VALUE=" . EnumTest::VALUE_FLOAT);
-        $this->assertEquals(EnumTest::VALUE_FLOAT, $config->getValue());
-
-        putenv("{$prefix}VALUE");
-        $this->assertNull($config->getValue());
     }
 }

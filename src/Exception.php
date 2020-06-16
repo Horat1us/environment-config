@@ -1,11 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Horat1us\Environment;
 
-/**
- * Interface Exception
- * @package Horat1us\Environment
- */
-interface Exception extends \Throwable
+interface Exception extends \Dotenv\Exception\ExceptionInterface
 {
 }
