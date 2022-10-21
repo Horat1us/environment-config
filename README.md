@@ -2,6 +2,7 @@
 [![Latest Stable Version](https://poser.pugx.org/horat1us/environment-config/v/stable.png)](https://packagist.org/packages/horat1us/environment-config)
 [![Total Downloads](https://poser.pugx.org/horat1us/environment-config/downloads.png)](https://packagist.org/packages/horat1us/environment-config)
 [![codecov](https://codecov.io/gh/horat1us/environment-config/branch/master/graph/badge.svg)](https://codecov.io/gh/horat1us/environment-config)
+[![Test & Lint](https://github.com/Horat1us/environment-config/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/Horat1us/environment-config/actions/workflows/php.yml)
 
 Simple class to provide config using `getenv` function with prefix.
 
