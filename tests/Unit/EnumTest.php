@@ -4,6 +4,7 @@ namespace Horat1us\Environment\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Horat1us\Environment\Enum;
+use Horat1us\Environment\Exception;
 
 /**
  * Class EnumTest
@@ -38,9 +39,6 @@ class EnumTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \Horat1us\Environment\Exception\Invalid
-     */
     public function testFailureValidate(): void
     {
         $enum = new Enum([
@@ -59,6 +57,8 @@ class EnumTest extends TestCase
             new \stdClass()
         ]);
 
+        $this->expectException(Exception\Invalid::class);
+        $this->expectExceptionMessageMatches('/^Invalid value, expected one of string,123,123.456,array.*/m');
         $enum->validate(static::MOCK);
     }
 
