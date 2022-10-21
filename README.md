@@ -5,6 +5,8 @@
 
 Simple class to provide config using `getenv` function with prefix.
 
+Compatibility: tested on PHP 7.1, PHP 8.1
+
 [Changelog](./CHANGELOG.md)
 
 ## Installation
