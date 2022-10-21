@@ -98,9 +98,6 @@ class ConfigTest extends TestCase
         $this->assertNull($config->getNullValue());
     }
 
-    /**
-     * @expectedException \Horat1us\Environment\MissingEnvironmentException
-     */
     public function testMissingDefault(): void
     {
         $prefix = 'testPrefix';
@@ -113,6 +110,8 @@ class ConfigTest extends TestCase
             }
         };
         putenv("{$prefix}KEY"); // remove KEY from environment
+        $this->expectException(Environment\Exception\Missing::class);
+        $this->expectExceptionMessage('Missing environment key testPrefixKEY');
         $config->getValue();
     }
 
