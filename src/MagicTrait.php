@@ -16,7 +16,7 @@ trait MagicTrait
      * @param string $callerName
      * @return string
      */
-    final private function getEnvironmentKeySuffix(string $callerName): string
+    private function getEnvironmentKeySuffix(string $callerName): string
     {
         if (strlen($callerName) < 3
             || strpos($callerName, "get") !== 0
@@ -41,7 +41,7 @@ trait MagicTrait
      * @throws Exception\Missing
      * @return array|false|mixed|null|string
      */
-    final private function getEnvironment()
+    private function getEnvironment()
     {
         $fieldName = $this->getEnvironmentKeySuffix(
             $this->getCalledMethod()
@@ -50,7 +50,7 @@ trait MagicTrait
         return $this->getEnv($fieldName);
     }
 
-    final private function getCalledMethod(): string
+    private function getCalledMethod(): string
     {
         return debug_backtrace()[1]['function'];
     }
