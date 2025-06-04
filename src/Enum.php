@@ -45,7 +45,7 @@ class Enum
      * @return Enum
      * @throws \ReflectionException
      */
-    public static function fromConstants(string $className, string $prefix = null, array $except = []): Enum
+    public static function fromConstants(string $className, ?string $prefix = null, array $except = []): Enum
     {
         static $cache = [];
 
