@@ -10,7 +10,8 @@ trait ConfigTrait
 {
     /**
      * @param string $key
-     * @param null $default
+     * @param mixed $default returned when variable is not set; null means required,
+     * \Closure or callable array is called with ($key, $prefixedKey)
      * @throws Exception\Missing
      * @return array|false|mixed|null|string
      */
